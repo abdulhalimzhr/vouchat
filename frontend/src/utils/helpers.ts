@@ -1,3 +1,5 @@
+import io from 'socket.io-client';
+
 export const formatTimeOrDate = function (inputDate: Date): string {
   const now = new Date();
   const timeDifference = now.getTime() - inputDate.getTime();
@@ -7,7 +9,9 @@ export const formatTimeOrDate = function (inputDate: Date): string {
 
   if (timeDifference < oneHour && now.getDate() === inputDate.getDate()) {
     const minutesAgo = Math.floor(timeDifference / (60 * 1000));
-    return `${minutesAgo} minute${minutesAgo === 1 ? '' : 's'} ago`;
+    return `${minutesAgo < 0 ? 0 : minutesAgo} minute${
+      minutesAgo === 1 ? '' : 's'
+    } ago`;
   } else if (timeDifference < oneDay && now.getDate() === inputDate.getDate()) {
     const hoursAgo = Math.floor(timeDifference / oneHour);
     return `${hoursAgo} hour${hoursAgo === 1 ? '' : 's'} ago`;
@@ -24,3 +28,9 @@ export const formatTimeOrDate = function (inputDate: Date): string {
     });
   }
 };
+
+export const BASE_URL = 'http://192.168.1.154:3001';
+export const API_URL = `${BASE_URL}/api/chat/`;
+export const socket = io(BASE_URL, {
+  withCredentials: true
+});

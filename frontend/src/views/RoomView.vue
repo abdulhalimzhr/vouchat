@@ -1,15 +1,20 @@
 <template>
-  <div class="h-screen">
+  <div class="h-screen mt-20">
     <ChatWrapper :chats="chats" />
+    <div class="mt-20" v-if="chats.length > 5">
+      <hr ref="scrollDown" />
+    </div>
     <div class="fixed bottom-0 left-0 right-0 m-3">
       <input
         type="text"
         id="message"
         class="message__input"
         placeholder="Message here..."
+        v-model="message"
         required
+        @keyup.enter="sendChatMessage"
       />
-      <button type="submit" class="message__btn-send">
+      <button type="button" class="message__btn-send" @click="sendChatMessage">
         <i class="fas fa-arrow-up"></i>
       </button>
     </div>
@@ -17,29 +22,58 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { Chat } from '@/types/chatType';
+import { computed, onMounted, ref, watch } from 'vue';
 import ChatWrapper from '@/components/ChatWrapper.vue';
+import { useStore } from 'vuex';
+import { socket } from '@/utils/helpers';
 
-const chats = ref<Chat[]>([]);
+const store = useStore();
+const chats = computed(() => store.state.chat.chats);
+const roomId = computed(() => store.state.join.roomId);
+const message = ref('');
+const scrollDown = ref(null);
+
+const sendChatMessage = () => {
+  if (!message.value) return;
+  store.dispatch('chat/sendChatMessage', message.value).then(() => {
+    message.value = '';
+    loadChats();
+  });
+};
+
+const scrollToBottom = () => {
+  if (chats.value.length < 5) return;
+  let delay = null;
+  delay = setTimeout(() => {
+    if (scrollDown.value) {
+      scrollDown.value.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  }, 200);
+};
+
+const loadChats = () => {
+  store.dispatch('chat/getChatMessages', roomId.value);
+};
+
+socket.on('chat message', (message) => {
+  if (message.roomId === roomId.value) {
+    loadChats();
+    scrollToBottom();
+  }
+});
 
 onMounted(() => {
-  chats.value = [
-    {
-      id: 1,
-      username: 'John Doe',
-      message: 'Hello World',
-      self: false,
-      timestamp: '2021-08-01T12:11:00.000Z'
-    },
-    {
-      id: 2,
-      username: 'Jane Doe',
-      message: 'Hi, John',
-      self: true,
-      timestamp: '2021-08-01T12:12:00.000Z'
-    }
-  ];
+  loadChats();
+  scrollToBottom();
+});
+watch(chats.value, () => {
+  const checkChats = chats.value
+    ? chats.value.map((chat) => chat.roomId === roomId.value)
+    : [];
+
+  if (checkChats.length === 0) {
+    loadChats();
+  }
 });
 </script>
 

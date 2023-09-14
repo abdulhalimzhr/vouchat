@@ -1,28 +1,21 @@
+import { Chat, ChatResponse } from '@/types/chatType';
 import axios, { AxiosResponse } from 'axios';
-
-const API_URL = 'http://localhost:3001/api/chat/';
-
-interface User {
-  username: string;
-  roomId: string;
-}
-
-interface ChatResponse {
-  sessionId: string;
-}
+import { API_URL, socket } from '@/utils/helpers';
 
 class ChatService {
-  async getChatMessages(user: User): Promise<ChatResponse> {
+  async getChatMessages(roomId: string): Promise<ChatResponse> {
     return axios
-      .post<ChatResponse>(API_URL + 'join', {
-        username: user.username,
-        roomId: user.roomId
-      })
+      .get<ChatResponse>(`${API_URL}messages/room/${roomId}`)
       .then((response: AxiosResponse<ChatResponse>) => {
-        if (response.data.sessionId) {
-          localStorage.setItem('sessionId', JSON.stringify(response.data));
-        }
+        return response.data;
+      });
+  }
 
+  async sendChatMessage(chat: Chat): Promise<ChatResponse> {
+    return axios
+      .post<ChatResponse>(`${API_URL}send-message`, chat)
+      .then((response: AxiosResponse<ChatResponse>) => {
+        socket.emit('chat message', chat);
         return response.data;
       });
   }

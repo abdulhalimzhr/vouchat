@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="sticky top-0 left-0 right-0 h-13 p-3 z-10 bg-white items-center"
+    class="fixed top-0 left-0 right-0 h-13 p-3 z-10 bg-white items-center"
     v-if="$route.name === 'room'"
   >
     <div class="w-full flex">
@@ -11,9 +11,6 @@
         <h1 class="font-bold text-2xl">Room {{ roomId }}</h1>
       </div>
       <div class="w-1/5"></div>
-    </div>
-    <div class="mt-3">
-      <p class="text-sm">John is typing...</p>
     </div>
   </nav>
 

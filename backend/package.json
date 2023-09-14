@@ -24,6 +24,7 @@
     "mongoose-sequence": "^5.3.1",
     "node-fetch": "^3.3.2",
     "nodemon": "^3.0.1",
+    "socket.io": "^4.7.2",
     "validator": "^13.11.0"
   },
   "scripts": {

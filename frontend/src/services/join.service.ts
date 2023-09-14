@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-const API_URL = 'http://localhost:3001/api/chat/';
+const API_URL = 'http://192.168.1.154:3001/api/chat/';
 
 interface Join {
   username: string;

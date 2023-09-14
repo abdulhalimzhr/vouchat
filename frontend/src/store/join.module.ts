@@ -1,20 +1,10 @@
 import JoinService from '../services/join.service';
-
-interface Join {
-  username: string;
-  roomId: string;
-}
-
-interface JoinState {
-  roomId: string;
-  sessionId: string;
-  username: string;
-}
+import { Join, JoinState } from '../types/joinType';
 
 const initialState: JoinState = {
-  roomId: '',
+  roomId: localStorage.getItem('roomId') ?? '',
   sessionId: localStorage.getItem('sessionId') ?? '',
-  username: ''
+  username: localStorage.getItem('username') ?? ''
 };
 
 export const join = {
@@ -31,6 +21,7 @@ export const join = {
               username: data.data.username
             };
             commit('joined', result);
+            commit('chat/resetChatMessages', null, { root: true });
             return Promise.resolve();
           },
           (error: any) => {
@@ -69,12 +60,17 @@ export const join = {
       state.sessionId = data.sessionId;
       state.roomId = data.roomId;
       state.username = data.username;
+
+      localStorage.setItem('username', data.username);
       localStorage.setItem('sessionId', data.sessionId);
+      localStorage.setItem('roomId', data.roomId);
     },
     exit(state: JoinState) {
       state.sessionId = '';
       state.roomId = '';
       localStorage.removeItem('sessionId');
+      localStorage.removeItem('roomId');
+      localStorage.removeItem('username');
     }
   },
   getters: {

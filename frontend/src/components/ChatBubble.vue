@@ -1,5 +1,5 @@
 <template>
-  <div :class="[props.self ? 'text-right' : 'text-left']">
+  <div class="chat-wrapper" :class="[props.self ? 'text-right' : 'text-left']">
     <div class="chat-bubble__username" v-show="!props.self">
       {{ props.username }}
     </div>
@@ -49,7 +49,7 @@ const props = defineProps<{
       }
 
       &-message {
-        @apply mx-2 my-1 text-sm;
+        @apply text-sm max-w-full break-words p-2;
       }
 
       &-time {

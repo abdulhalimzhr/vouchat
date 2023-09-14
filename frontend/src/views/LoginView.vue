@@ -65,7 +65,13 @@ const joinRoom = () => {
       });
     })
     .catch((err) => {
-      error.value = err.response.data;
+      error.value =
+        err && err.response
+          ? err.response.data
+          : {
+              error: true,
+              message: err.message
+            };
       console.log(err);
     });
 };
