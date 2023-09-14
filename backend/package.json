@@ -1,0 +1,34 @@
+{
+  "name": "backend-for-vouchat",
+  "version": "1.0.0",
+  "description": "backend for vouChat test",
+  "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdulhalimzhr/vouchat.git"
+  },
+  "author": "Abdul Halim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abdulhalimzhr/vouchat/issues"
+  },
+  "homepage": "https://github.com/abdulhalimzhr/vouchat#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.0.0",
+    "mongoose": "^7.5.0",
+    "mongoose-sequence": "^5.3.1",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.0.1",
+    "validator": "^13.11.0"
+  },
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

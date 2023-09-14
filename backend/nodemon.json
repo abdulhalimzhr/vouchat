@@ -1,0 +1,16 @@
+{
+    "restartable": "rs",
+    "ignore": [
+        ".git",
+        "node_modules/**/node_modules"
+    ],
+    "verbose": true,
+    "watch": [
+        "src/*",
+        "index.js"
+    ],
+    "ext": "js, json",
+    "exec": "node index.js",
+    "pollingInterval": 100,
+    "legacyWatch": true
+}

@@ -1,0 +1,33 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+    ports:
+      - '3001:3001'
+    depends_on:
+      - database
+    networks:
+      - vouchat
+    volumes:
+      - ./backend:/app
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+    ports:
+      - '8080:8080'
+    networks:
+      - vouchat
+    volumes:
+      - ./frontend:/app
+  database:
+    container_name: database
+    image: mongo
+    ports:
+      - '27017:27017'
+    networks:
+      - vouchat
+networks:
+  vouchat:
