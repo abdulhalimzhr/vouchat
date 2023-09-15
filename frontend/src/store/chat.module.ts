@@ -1,3 +1,4 @@
+import router from '@/router';
 import ChatService from '../services/chat.service';
 import { Chat, ChatState } from '../types/chatType';
 
@@ -10,7 +11,13 @@ export const chat = {
   namespaced: true,
   state: initialState,
   actions: {
-    async getChatMessages({ commit }: any, roomId: string) {
+    async getChatMessages({ commit, rootState }: any, roomId: string) {
+      if (rootState.join.sessionId !== roomId) {
+        commit('join/exit', null, { root: true });
+
+        router.push('/');
+        return;
+      }
       return await ChatService.getChatMessages(roomId).then(
         (data: any) => {
           commit('updateChatMessages', data.data);
@@ -38,7 +45,7 @@ export const chat = {
           }
         );
       } catch (error) {
-        return Promise.reject(error);
+        router.push('/');
       }
     }
   },
