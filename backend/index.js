@@ -16,6 +16,7 @@ const allowedOrigins = [
   process.env.BASE_URL,
   process.env.HOST_IP,
   'http://localhost:8081',
+  'http://192.168.1.154:8080',
   'http://192.168.1.154:8081',
   'http://localhost:3000',
   'http://localhost:3001',

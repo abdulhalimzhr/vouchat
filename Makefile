@@ -1,17 +1,27 @@
 .SILENT:
 
-DOCKER   = docker
-TERMINAL = $(DOCKER) exec -it
-COMPOSE  = $(DOCKER)-compose
-NPM_RUN  = npm run
+DOCKER         = docker
+TERMINAL       = $(DOCKER) exec 
+COMPOSE        = $(DOCKER)-compose
+NPM            = npm
+NPM_RUN        = $(NPM) run
+GOTO           = cd
+GOTO_FRONTEND  = $(GOTO) frontend
+GOTO_BACKEND   = $(GOTO) backend
+
+# args := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+export env
 
 .PHONY: up
-up:
+up: env
 	$(COMPOSE) up -d
 
 .PHONY: build
-build:
+build: env
 	$(COMPOSE) up -d --build
+	$(TERMINAL) frontend $(NPM) install
+	$(TERMINAL) frontend $(NPM) run build
+	$(TERMINAL) backend $(NPM) install
 
 .PHONY: stop
 stop:
@@ -31,16 +41,27 @@ logf:
 
 .PHONY: shellb
 shellb:
-	$(TERMINAL) backend /bin/bash
+	$(TERMINAL) -it backend sh
 
 .PHONY: shelf
 shellf:
-	$(TERMINAL) frontend /bin/bash
+	$(TERMINAL) -it frontend sh
 
 .PHONY: startf
 startf:
-	cd frontend && $(NPM_RUN) serve
+	$(GOTO_FRONTEND) && $(NPM_RUN) serve
 
 .PHONY: startb
 startb:
-	cd backend && $(NPM_RUN) dev
+	$(GOTO_BACKEND) && $(NPM_RUN) dev
+
+.PHONY: env
+env:
+	@echo "Creating $(env) env"
+ifeq ("$(env)","local")
+	$(GOTO_FRONTEND) && cp .env.localhost .env
+else ifeq ("$(env)","public")
+	$(GOTO_FRONTEND) && cp .env.public .env
+else
+	$(GOTO_FRONTEND) && cp .env.example .env
+endif

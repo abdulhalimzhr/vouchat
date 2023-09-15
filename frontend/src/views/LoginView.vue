@@ -70,7 +70,7 @@ const joinRoom = () => {
           ? err.response.data
           : {
               error: true,
-              message: err.message
+              message: err.message ?? err
             };
       console.log(err);
     });

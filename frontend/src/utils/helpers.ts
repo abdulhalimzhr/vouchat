@@ -29,7 +29,7 @@ export const formatTimeOrDate = function (inputDate: Date): string {
   }
 };
 
-export const BASE_URL = 'http://192.168.1.154:3001';
+export const BASE_URL = `${process.env.VUE_APP_BACKEND_URL}:3001`;
 export const API_URL = `${BASE_URL}/api/chat/`;
 export const socket = io(BASE_URL, {
   withCredentials: true

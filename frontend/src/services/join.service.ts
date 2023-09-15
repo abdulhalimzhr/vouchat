@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-
-const API_URL = 'http://192.168.1.154:3001/api/chat/';
+import { API_URL } from '@/utils/helpers';
 
 interface Join {
   username: string;
