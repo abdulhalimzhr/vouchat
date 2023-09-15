@@ -42,6 +42,7 @@ This is a live chat (web) application that allows users to interact with other u
 [![wakatime](https://wakatime.com/badge/user/52dc8466-d511-4812-bfed-fa756030a686/project/3dbcaaf2-b071-4d74-b73d-8b4a06daf5f2.svg)](https://wakatime.com/badge/user/52dc8466-d511-4812-bfed-fa756030a686/project/3dbcaaf2-b071-4d74-b73d-8b4a06daf5f2)
 
 [Details](https://wakatime.com/@52dc8466-d511-4812-bfed-fa756030a686/projects/kfrysihkpl?start=2023-09-09&end=2023-09-15)
+
 <sub>The duration might be showed up as 0 sec, this is because i have renamed it from vouch to VouChat.</sub>
 
 ---

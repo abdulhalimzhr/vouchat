@@ -66,6 +66,7 @@ onMounted(() => {
   loadChats();
   scrollToBottom();
 });
+
 watch(chats.value, () => {
   const checkChats = chats.value
     ? chats.value.map((chat) => chat.roomId === roomId.value)
