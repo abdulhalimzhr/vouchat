@@ -71,6 +71,10 @@ export const join = {
       localStorage.removeItem('sessionId');
       localStorage.removeItem('roomId');
       localStorage.removeItem('username');
+    },
+    resetRoomId(state: JoinState, roomId: string) {
+      state.roomId = roomId;
+      localStorage.setItem('roomId', roomId);
     }
   },
   getters: {

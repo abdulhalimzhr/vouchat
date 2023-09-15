@@ -12,7 +12,7 @@ export const chat = {
   state: initialState,
   actions: {
     async getChatMessages({ commit, rootState }: any, roomId: string) {
-      if (rootState.join.sessionId !== roomId) {
+      if (rootState.join.roomId && rootState.join.roomId !== roomId) {
         commit('join/exit', null, { root: true });
 
         router.push('/');

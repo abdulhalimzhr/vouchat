@@ -25,15 +25,18 @@ const router = createRouter({
 
 router.beforeEach((to: any, from: any, next: any) => {
   const loggedIn = localStorage.getItem('sessionId');
+  const roomid = localStorage.getItem('roomId');
+  const routeRoomId = to.params.id;
 
-  if (
-    to.matched.some((record: RouteRecordRaw) => record.meta?.requiresAuth) &&
-    !loggedIn
-  ) {
-    next('/');
+  if (to.matched.some((record: RouteRecordRaw) => record.meta?.requiresAuth)) {
+    if (!loggedIn || routeRoomId !== roomid) {
+      next('/');
+    } else {
+      next();
+    }
+  } else {
+    next();
   }
-
-  next();
 });
 
 export default router;
