@@ -16,7 +16,7 @@ Tested on Windows 11 with Hyper-V Docker (Because WSL is too slow).
 2. Open the terminal within this project's directory
 3. Run the following command to install all project dependencies, this will take 5-10 minutes to finish. If you want to use the build public options, ensure the IP value in the `.env` is updated and accessible from LAN. Otherwise, you can use the build local option.
 
-   - For public (in case you want this app accessible from LAN)
+   - For the public (in case you want this app accessible from LAN)
 
    ```
     make build env=public
@@ -31,6 +31,10 @@ Tested on Windows 11 with Hyper-V Docker (Because WSL is too slow).
    ```
 
 4. After the setup is completed, you can access the application through http://localhost:8080
+
+### NOTE 
+
+There are known issues regarding refreshing the page when inside the room, it returns 404. This is most likely an error from the node.js. I have run out of time to fix this issue, so for now, this app will work only in the local environment.
 
 ## Additional Information
 
@@ -96,6 +100,8 @@ Based on the requirements provided, some of the assumptions made throughout the 
 - By implementing a CSRF to protect the app from CSRF attacks.
 - Lastly, securing the route to avoid unauthorized access to the app. For example, by implementing a middleware to ensure the user has a legitimate `sessionId` to access the chat room. Otherwise, the user will be redirected to the login page.
 
+---
+
 ### What should I have included in this solution? Was I short on time and not able to include something?
 
 One feature was not implemented in this solution due to short on time, which was the "typing indicator" feature. This feature should allow a user to see when others are typing a message in the room chat.
@@ -105,3 +111,12 @@ One feature was not implemented in this solution due to short on time, which was
 ### Feedback on the Technical Challenge
 
 More detailed and specific information related to the flows and requirements would be highly appreciated to better understand and implement the features.
+
+---
+
+### Application Preview
+![image](https://github.com/abdulhalimzhr/vouchat/assets/75671219/942d8d98-01e8-4994-b0e7-7e374a2afd5c)
+![photo_2023-09-16_11-14-01](https://github.com/abdulhalimzhr/vouchat/assets/75671219/e55adad4-3340-4e03-9d49-26863e6cf2c8)
+
+https://github.com/abdulhalimzhr/vouchat/assets/75671219/db58fd9c-5434-48e3-a560-48cd1eb1ee8a
+
