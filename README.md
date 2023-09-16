@@ -32,9 +32,21 @@ Tested on Windows 11 with Hyper-V Docker (Because WSL is too slow).
 
 4. After the setup is completed, you can access the application through http://localhost:8080
 
-### NOTE 
+### NOTE
 
-There are known issues regarding refreshing the page when inside the room, it returns 404. This is most likely an error from the node.js. I have run out of time to fix this issue, so for now, this app will work only in the local environment.
+Please be advised that there are currently some issues with page refreshing when inside the room, resulting in a 404 error. This is likely due to an error in the Node.js server configuration when Vue is using history mode. Unfortunately, I have run out of time to address this issue. If you encounter this problem, please use the following commands instead
+
+```
+   make starf
+```
+
+and then open another terminal and run this command:
+
+```
+   make startb
+```
+
+Thank you for your understanding and consideration.
 
 ## Additional Information
 
@@ -66,6 +78,7 @@ Based on the requirements provided, some of the assumptions made throughout the 
 - A user should not be able to join a chat room, e.g., "Chat Room A." if the username is already taken by another active user within the "Chat Room A."
 - A user can join a chat room, e.g., "Chat Room A." using a specific username even though other users have the same username in another chat room, e.g., "Chat Room B."
 - There is no limitation on how many users can join the same room.
+- Chat history in a specific room will not be erased when any or all user leave the room
 
 ---
 
@@ -104,7 +117,7 @@ Based on the requirements provided, some of the assumptions made throughout the 
 
 ### What should I have included in this solution? Was I short on time and not able to include something?
 
-One feature was not implemented in this solution due to short on time, which was the "typing indicator" feature. This feature should allow a user to see when others are typing a message in the room chat.
+- Some feature was not implemented in this solution due to short on time, which was the "typing indicator" feature. This feature should allow a user to see when others are typing a message in the room chat. Also "joined room" notification, which should allow a user to see when others join the room chat.
 
 ---
 
@@ -115,8 +128,8 @@ More detailed and specific information related to the flows and requirements wou
 ---
 
 ### Application Preview
+
 ![image](https://github.com/abdulhalimzhr/vouchat/assets/75671219/942d8d98-01e8-4994-b0e7-7e374a2afd5c)
 ![photo_2023-09-16_11-14-01](https://github.com/abdulhalimzhr/vouchat/assets/75671219/e55adad4-3340-4e03-9d49-26863e6cf2c8)
 
 https://github.com/abdulhalimzhr/vouchat/assets/75671219/db58fd9c-5434-48e3-a560-48cd1eb1ee8a
-
