@@ -54,8 +54,10 @@ class ChatController {
         sessionId: crypto.randomBytes(16).toString('hex')
       });
     } catch (err) {
-      console.error(err.message);
-      next(err);
+      return res.status(400).json({
+        error: true,
+        message: err.message
+      });
     }
   }
 
@@ -89,8 +91,10 @@ class ChatController {
         data: data
       });
     } catch (err) {
-      console.error(err.message);
-      next(err);
+      return res.status(400).json({
+        error: true,
+        message: err.message
+      });
     }
   }
 
@@ -159,8 +163,10 @@ class ChatController {
         data: data
       });
     } catch (err) {
-      console.error(err.message);
-      next(err);
+      return res.status(400).json({
+        error: true,
+        message: err.message
+      });
     }
   }
 
@@ -223,8 +229,10 @@ class ChatController {
         data: data
       });
     } catch (err) {
-      console.error(err.message);
-      next(err);
+      return res.status(400).json({
+        error: true,
+        message: err.message
+      });
     }
   }
 }
